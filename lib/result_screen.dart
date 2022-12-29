@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ResultScreen extends StatelessWidget {
   ResultScreen({super.key, required this.code, required this.closeScreen});
@@ -11,7 +12,7 @@ class ResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return await closeScreen() ?? false;
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
@@ -57,10 +58,21 @@ class ResultScreen extends StatelessWidget {
               const SizedBox(
                 height: 3,
               ),
-              Text(
-                code,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
+              GestureDetector(
+                onTap: () async {
+                  if (await canLaunchUrl(Uri.parse(code))) {
+                    await launchUrl(Uri.parse(code));
+                  } else {
+                    throw 'Could not launch $code';
+                  }
+                },
+                child: Text(
+                  code,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline1!.copyWith(
+                        color: Colors.blue,
+                      ),
+                ),
               ),
               const SizedBox(
                 height: 10,
