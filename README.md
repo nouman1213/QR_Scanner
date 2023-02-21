@@ -1,5 +1,5 @@
 # qr_scanner
-
+[Watch Demo](https://www.youtube.com/shorts/8_-td9G39O0)
 <table>
   <tr>
     <td><img src="https://user-images.githubusercontent.com/72551841/210091050-adc68fd0-9e5f-48c6-bcf0-7ab3fa0974f9.jpeg" width="200"></td>  
